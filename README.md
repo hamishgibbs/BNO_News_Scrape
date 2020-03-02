@@ -4,10 +4,6 @@ Full timeline URL: https://bnonews.com/index.php/2020/01/timeline-coronavirus-ep
 Most recent cases URL: https://bnonews.com/index.php/2020/02/the-latest-coronavirus-cases/
 
 ### Output files:
-BNO_non_matching_text.csv
-BNO_Scraped_Data.csv
-BNO_Scraped_International.csv
-
 
 #### BNO_non_matching_text.csv  
 file to store sections of text that cannot be parsed. These records will be manually updated
