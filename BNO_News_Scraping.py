@@ -32,8 +32,8 @@ r = requests.get(url_2)
 soup = BeautifulSoup(r.text, 'html.parser')
 
 #%%
-last_scrape_non_matching = pd.read_csv('/Users/hamishgibbs/Documents/LSHTM/nCOV-2019/Connectivity_Analysis/COVID-2019_Connectivity/BNO_News/BNO_non_matching_text.csv', parse_dates=['date'], index_col = 0)
-last_scrape = pd.read_csv('/Users/hamishgibbs/Documents/LSHTM/nCOV-2019/Connectivity_Analysis/COVID-2019_Connectivity/BNO_News/BNO_Scraped_Data.csv', parse_dates=['date'], index_col = 0)
+last_scrape_non_matching = pd.read_csv('/Users/hamishgibbs/Dropbox/nCov-2019/data_sources/case_data/International_Case_Data_BNO/BNO_non_matching_text.csv', parse_dates=['date'], index_col = 0)
+last_scrape = pd.read_csv('/Users/hamishgibbs/Dropbox/nCov-2019/data_sources/case_data/International_Case_Data_BNO/BNO_Scraped_Data.csv', parse_dates=['date'], index_col = 0)
 most_recent_scrape_time = max(last_scrape['date'])
 #%%
 #find all date elements and list items in the html
@@ -222,8 +222,8 @@ for i, date in enumerate(dates):
                                  'link':link})   
 #save data to csvs   
 sd = pd.DataFrame(scraped_data)
-sd.to_csv('/Users/hamishgibbs/Documents/LSHTM/nCOV-2019/Connectivity_Analysis/COVID-2019_Connectivity/BNO_News/BNO_Scraped_Data.csv')    
-pd.DataFrame(non_matching_text).to_csv('/Users/hamishgibbs/Documents/LSHTM/nCOV-2019/Connectivity_Analysis/COVID-2019_Connectivity/BNO_News/BNO_non_matching_text.csv')    
+sd.to_csv('/Users/hamishgibbs/Dropbox/nCov-2019/data_sources/case_data/International_Case_Data_BNO/BNO_Scraped_Data.csv')    
+pd.DataFrame(non_matching_text).to_csv('/Users/hamishgibbs/Dropbox/nCov-2019/data_sources/case_data/International_Case_Data_BNO/BNO_non_matching_text.csv')    
 
 sd.drop(['territory', 'link'], axis=1, inplace=True)
 
@@ -235,4 +235,4 @@ for country in sd.country:
         country_col.append('International')
 sd['country'] = country_col
 
-sd.to_csv('/Users/hamishgibbs/Documents/LSHTM/nCOV-2019/Connectivity_Analysis/COVID-2019_Connectivity/BNO_News/BNO_Scraped_International.csv')
+sd.to_csv('/Users/hamishgibbs/Dropbox/nCov-2019/data_sources/case_data/International_Case_Data_BNO/BNO_Scraped_International.csv')
