@@ -6,7 +6,7 @@ Most recent cases URL: https://bnonews.com/index.php/2020/02/the-latest-coronavi
 ### Output files:
 
 #### BNO_non_matching_text.csv  
-file to store sections of text that cannot be parsed. These records will be manually updated
+file to store sections of text that cannot be parsed. These records will be updated manually
 
 #### BNO_Scraped_Data.csv  
 Full dataset of cases counts with source URL and some sub-national geographic information 
