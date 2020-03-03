@@ -13,6 +13,7 @@ try:
     from bs4 import BeautifulSoup
 except:
     print("PackageNotInstalledError: BeautifulSoup is not installed. Install using 'pip install bs4' or 'conda install bs4' in terminal")
+
 from datetime import datetime
 import re
 
