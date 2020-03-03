@@ -8,7 +8,11 @@ Created on Fri Feb 28 23:30:36 2020
 
 import requests
 import pandas as pd
-from bs4 import BeautifulSoup
+
+try:
+    from bs4 import BeautifulSoup
+except:
+    print("PackageNotInstalledError: BeautifulSoup is not installed. Install using 'pip install bs4' or 'conda install bs4' in terminal")
 from datetime import datetime
 import re
 
