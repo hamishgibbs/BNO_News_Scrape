@@ -16,6 +16,7 @@ except:
 
 from datetime import datetime
 import re
+import os
 
 #%%
 #get list of countries to check that an identified country name is not actually a province
@@ -37,6 +38,7 @@ r = requests.get(url_2)
 soup = BeautifulSoup(r.text, 'html.parser')
 
 #%%
+os.chdir('/Users/hamishgibbs/Dropbox/nCov-2019/data_sources/case_data/International_Case_Data_BNO')
 last_scrape_non_matching = pd.read_csv('./BNO_non_matching_text.csv', parse_dates=['date'], index_col = 0)
 last_scrape = pd.read_csv('./BNO_Scraped_Data.csv', parse_dates=['date'], index_col = 0)
 most_recent_scrape_time = max(last_scrape['date'])
@@ -47,11 +49,11 @@ list_data = soup.find(id = 'mvp-content-main').find_all('ul')[2:]
 
 #save any sections of text that do not match patterns
 non_matching_text = last_scrape_non_matching.to_dict(orient='records')
-#non_matching_text = []
+non_matching_text = []
 #save correctly formatted text data
 scraped_data = last_scrape.to_dict(orient='records')
 #%%
-#scraped_data = []
+scraped_data = []
 #for each date header element in the html
 for i, date in enumerate(dates):
     
@@ -60,13 +62,14 @@ for i, date in enumerate(dates):
     date = datetime.strptime(date, '%d %B %Y')
             
     #find all list items (held in 'ul' element under the date header)
-    list_items = list_data[i].find_all('li')
+    list_items = list_data[i + 1].find_all('li')
     
     #for each list entry on this date
     for li in list_items: 
         
         #extract text
         li_text = li.text
+        print(li_text)
         
         #ignore day totals
         if 'Total at the end of the day' in li_text:
@@ -100,8 +103,14 @@ for i, date in enumerate(dates):
             news_date = date
             time = li_text[0:5].split(':')
             news_date = news_date.replace(hour = int(time[0]), minute = int(time[1]))
+            print(news_date)
 
-        except:
+
+        except Exception as e:
+            print(e)
+            
+            print(news_date)
+
             continue
             
         #only update the dataset if this record has not been scraped yet
@@ -227,6 +236,7 @@ for i, date in enumerate(dates):
                                  'link':link})   
 #save data to csvs   
 sd = pd.DataFrame(scraped_data)
+sd = sd.drop_duplicates()
 sd.to_csv('./BNO_Scraped_Data.csv')    
 pd.DataFrame(non_matching_text).to_csv('./BNO_non_matching_text.csv')    
 
